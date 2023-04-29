@@ -29,13 +29,13 @@ const BlogNav = () => {
         to="https://y04nqt.github.io"
         className="text-black no-underline hover:underline"
       >
-        Go Back
+        🏠 Home
       </Link>
       <Link
         className="text-center block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300"
         to="/"
       >
-        🏠 Home
+        Welcome!
       </Link>
       {blogs.length > 0 &&
         blogs.map((item: { link: string; name: string }) => (
