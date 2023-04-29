@@ -40,7 +40,7 @@ const BlogNav = () => {
       {blogs.length > 0 &&
         blogs.map((item: { link: string; name: string }) => (
           <Link
-            className="block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300"
+            className="block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300 appear-in"
             key={item.name}
             to={`/${item.link}`}
           >
