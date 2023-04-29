@@ -10,6 +10,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import BlogLoader from "./components/BlogLoader";
 import BlogPost from "./components/BlogPost";
+import CenteredWrapper from "./components/CenteredWrapper";
+import Landing from "./components/Landing";
 
 const router = createHashRouter([
   {
@@ -17,6 +19,10 @@ const router = createHashRouter([
     element: <App/>,
     errorElement: <h1>Oh No, turn back!</h1>,
     children: [
+      {
+        path: '/',
+        element: (<Landing/>)
+      },
       {
         loader: ({ params }) => BlogLoader(params),
         path: "/:id",
