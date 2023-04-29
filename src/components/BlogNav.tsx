@@ -25,12 +25,12 @@ const BlogNav = () => {
       style={{ boxShadow: "4px 4px 16px 4px rgba(100,100,100,0.3)" }}
       className="absolute h-[calc(100%-2.5rem-61px)] w-[150px] bg-white px-10 py-5 my-0 text-left z-20"
     >
-      <Link
-        to="https://y04nqt.github.io"
+      <a
+        href="https://y04nqt.github.io/"
         className="text-black no-underline hover:underline"
       >
         🏠 Home
-      </Link>
+      </a>
       <Link
         className="text-center block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300"
         to="/"
