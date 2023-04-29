@@ -8,7 +8,7 @@ const BlogPost = () => {
     const { blog } = useLoaderData();
     return (
         <CenteredWrapper>
-            <div className="flex max-h-[calc(100%-61px)] bg-white rounded-xl shadow-xl">
+            <div className={`flex max-h-[calc(100%-61px)] bg-white rounded-xl shadow-xl appear-in`}>
                 <section className="flex flex-col p-10 overflow-y-auto text-left">
                     <h1 className="m-0">{blog.title}</h1>
                     <small>{blog.author}</small>
