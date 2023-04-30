@@ -11,12 +11,13 @@ import reportWebVitals from "./reportWebVitals";
 import BlogLoader from "./components/BlogLoader";
 import BlogPost from "./components/BlogPost";
 import Landing from "./components/Landing";
+import NotFound from "./components/404";
 
 const router = createHashRouter([
   {
     path: "/",
     element: <App/>,
-    errorElement: <h1>Oh No, turn back!</h1>,
+    errorElement: <NotFound/>,
     children: [
       {
         path: '/',
