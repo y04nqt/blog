@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const BlogNav = () => {
   const [blogs, setBlogs] = useState([]);
-
+  const location = useLocation();
   useEffect(() => {
     const getBlogNav = async () => {
       try {
@@ -20,6 +20,7 @@ const BlogNav = () => {
 
     getBlogNav();
   }, []);
+
   return (
     <nav
       style={{ boxShadow: "4px 4px 16px 4px rgba(100,100,100,0.3)" }}
@@ -32,7 +33,7 @@ const BlogNav = () => {
         🏠 Home
       </a>
       <Link
-        className="text-center block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300"
+        className={`text-center block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300 ${location.pathname.substring(1) === '' ? 'bg-blue-200' : ''}`}
         to="/"
       >
         Welcome!
@@ -40,7 +41,7 @@ const BlogNav = () => {
       {blogs.length > 0 &&
         blogs.map((item: { link: string; name: string }) => (
           <Link
-            className="block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300 appear-in"
+            className={`block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300 appear-in ${location.pathname.substring(1) === item.link ? 'bg-blue-200' : ''}`}
             key={item.name}
             to={`/${item.link}`}
           >

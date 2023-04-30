@@ -10,7 +10,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import BlogLoader from "./components/BlogLoader";
 import BlogPost from "./components/BlogPost";
-import CenteredWrapper from "./components/CenteredWrapper";
 import Landing from "./components/Landing";
 
 const router = createHashRouter([
