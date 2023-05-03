@@ -52,7 +52,7 @@ const BlogNav = () => {
         Welcome!
       </Link>
       <div className="">
-        <Input placeholder="Search posts" onChange={(e) => setSearch(e.target.value)}/>
+        <Input className="w-full" placeholder="Search posts" onChange={(e) => setSearch(e.target.value)}/>
       </div>
 
       {blogs.length > 0 &&
@@ -60,9 +60,9 @@ const BlogNav = () => {
           <div
             key={item.name}
           >
-            <h4 className="font-thin">{item.title}</h4>
+            <h4 className="mb-0 font-thin">{item.title}</h4>
             <Link
-              className={`block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300 appear-in ${location.pathname.substring(1) === item.link ? 'bg-blue-200' : ''}`}
+              className={`block my-4 mt-1 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300 appear-in ${location.pathname.substring(1) === item.link ? 'bg-blue-200' : ''}`}
               to={`/${item.link}`}
             >
               {item?.name}
