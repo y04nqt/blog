@@ -1,8 +1,23 @@
+import { Input } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+interface IItem { link: string; name: string; title: string }
+
 const BlogNav = () => {
   const [blogs, setBlogs] = useState([]);
+  const [search, setSearch] = useState('');
+
+  const multiFilter = (item:IItem) => {
+    let searchFormatted = search.toLowerCase().trim();
+    if (item.name.toLowerCase().includes(searchFormatted)
+    || item.title.toLowerCase().includes(searchFormatted)
+    || item.link.toLowerCase().includes(searchFormatted)) {
+      return item;
+    }
+  }
+  
+  
   const location = useLocation();
   useEffect(() => {
     const getBlogNav = async () => {
@@ -36,10 +51,14 @@ const BlogNav = () => {
       >
         Welcome!
       </Link>
+      <div className="">
+        <Input placeholder="Search posts" onChange={(e) => setSearch(e.target.value)}/>
+      </div>
+
       {blogs.length > 0 &&
-        blogs.map((item: { link: string; name: string; title: string }) => (
+        blogs.filter((item: IItem) => multiFilter(item)).map((item: { link: string; name: string; title: string }) => (
           <div>
-            <h4>{item.title}</h4>
+            <h4 className="font-thin">{item.title}</h4>
             <Link
               className={`block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300 appear-in ${location.pathname.substring(1) === item.link ? 'bg-blue-200' : ''}`}
               key={item.name}
