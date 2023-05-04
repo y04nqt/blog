@@ -17,11 +17,11 @@ const router = createHashRouter([
   {
     path: "/",
     element: <App/>,
-    errorElement: <NotFound/>,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',
-        element: (<Landing/>)
+        element: (<Landing />)
       },
       {
         loader: ({ params }) => BlogLoader(params),
