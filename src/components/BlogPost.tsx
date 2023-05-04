@@ -3,13 +3,17 @@ import CenteredWrapper from "./CenteredWrapper";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkBreaks from "remark-breaks";
 import React from "react";
+import { useIsMenuOpen } from "../pages/MainPage";
 
 const BlogPost = () => {
     //@ts-ignore
     const { blog } = useLoaderData();
+    const data = useIsMenuOpen();
+    //@ts-ignore
+    const {isMenuOpen} = data[0];
     return (
         <React.Suspense
-            fallback={<CenteredWrapper><p className="text-4xl font-thin text-center animate-pulse">Loading...</p></CenteredWrapper>}
+            fallback={<CenteredWrapper widthCalc="w-[calc(100%-5rem)] sm:w-[calc(100%-330px-5rem)]"><p className="mx-auto text-4xl font-thin animate-pulse">Loading...</p></CenteredWrapper>}
         >
             <Await
                 resolve={blog}
