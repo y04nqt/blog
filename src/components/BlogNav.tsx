@@ -1,5 +1,5 @@
 import { IconButton, Input } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -26,20 +26,15 @@ const BlogNav = ({setIsMenuOpen, isMenuOpen}:{setIsMenuOpen: (arg0:boolean)=>voi
   };
 
   const location = useLocation();
-  useEffect(() => {
-    const getBlogNav = async () => {
-      try {
-        const blogItems = await fetch(
-          `https://raw.githubusercontent.com/y04nqt/portfolio-data/main/nav-data.json`
-        );
-        setBlogs(await blogItems.json());
-      } catch (err) {
-        console.log(err);
-      }
-    };
 
-    getBlogNav();
+  const getBlogNavData = useCallback(async () => {
+    const blogNavItems = await fetch(`https://raw.githubusercontent.com/y04nqt/portfolio-data/main/nav-data.json`);
+    setBlogs(await blogNavItems.json());
   }, []);
+
+  useEffect(() => {
+    getBlogNavData();
+  }, [getBlogNavData]);
 
   return (
     <nav
