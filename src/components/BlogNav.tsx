@@ -10,25 +10,33 @@ interface IItem {
   title: string;
 }
 
-const BlogNav = ({setIsMenuOpen, isMenuOpen}:{setIsMenuOpen: (arg0:boolean)=>void; isMenuOpen: boolean}) => {
+const multiFilter = (item: IItem, searchTerm: string) => {
+  let searchFormatted = searchTerm.toLowerCase().trim();
+  if (
+    item.name.toLowerCase().includes(searchFormatted) ||
+    item.title.toLowerCase().includes(searchFormatted) ||
+    item.link.toLowerCase().includes(searchFormatted)
+  ) {
+    return item;
+  }
+};
+
+const BlogNav = ({
+  setIsMenuOpen,
+  isMenuOpen,
+}: {
+  setIsMenuOpen: (arg0: boolean) => void;
+  isMenuOpen: boolean;
+}) => {
   const [blogs, setBlogs] = useState([]);
   const [search, setSearch] = useState("");
-
-  const multiFilter = (item: IItem) => {
-    let searchFormatted = search.toLowerCase().trim();
-    if (
-      item.name.toLowerCase().includes(searchFormatted) ||
-      item.title.toLowerCase().includes(searchFormatted) ||
-      item.link.toLowerCase().includes(searchFormatted)
-    ) {
-      return item;
-    }
-  };
 
   const location = useLocation();
 
   const getBlogNavData = useCallback(async () => {
-    const blogNavItems = await fetch(`https://raw.githubusercontent.com/y04nqt/portfolio-data/main/nav-data.json`);
+    const blogNavItems = await fetch(
+      `https://raw.githubusercontent.com/y04nqt/portfolio-data/main/nav-data.json`
+    );
     setBlogs(await blogNavItems.json());
   }, []);
 
@@ -52,7 +60,11 @@ const BlogNav = ({setIsMenuOpen, isMenuOpen}:{setIsMenuOpen: (arg0:boolean)=>voi
           {!isMenuOpen && <MenuIcon />}
         </IconButton>
       </div>
-      <div className={`${isMenuOpen ? "block min-w-[250px]" : "hidden opacity-0"} transition-all duration-1000 sm:opacity-100   sm:block`}>
+      <div
+        className={`${
+          isMenuOpen ? "block min-w-[250px]" : "hidden opacity-0"
+        } transition-all duration-1000 sm:opacity-100   sm:block`}
+      >
         <a
           href="https://y04nqt.github.io/"
           className="text-black no-underline hover:underline"
@@ -63,7 +75,7 @@ const BlogNav = ({setIsMenuOpen, isMenuOpen}:{setIsMenuOpen: (arg0:boolean)=>voi
           className={`text-center block my-4 w-[calc(100%-1rem-3px)] p-2 no-underline border-solid border-1 rounded text-black text-ellipsis hover:shadow-lg transition-all duration-300 shadow ${
             location.pathname.substring(1) === "" ? "bg-blue-200" : ""
           }`}
-          onClick={()=>setIsMenuOpen(false)}
+          onClick={() => setIsMenuOpen(false)}
           to="/"
         >
           Welcome!
@@ -78,7 +90,7 @@ const BlogNav = ({setIsMenuOpen, isMenuOpen}:{setIsMenuOpen: (arg0:boolean)=>voi
 
         {blogs.length > 0 &&
           blogs
-            .filter((item: IItem) => multiFilter(item))
+            .filter((item: IItem) => multiFilter(item, search))
             .reverse()
             .map((item: { link: string; name: string; title: string }) => (
               <div key={item.name}>
@@ -89,14 +101,13 @@ const BlogNav = ({setIsMenuOpen, isMenuOpen}:{setIsMenuOpen: (arg0:boolean)=>voi
                       ? "bg-blue-200"
                       : ""
                   }`}
-                  onClick={()=>setIsMenuOpen(false)}
+                  onClick={() => setIsMenuOpen(false)}
                   to={`/${item.link}`}
                 >
                   {item?.name}
                 </Link>
               </div>
-            ))
-        }
+            ))}
       </div>
     </nav>
   );
